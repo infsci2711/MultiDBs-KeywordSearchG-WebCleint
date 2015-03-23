@@ -12,35 +12,35 @@
 
 
 	<script>
-$(document).ready(function() {
+            $(document).ready(function() {
     
-// String='neo4j.json';
-$('#MyButton').click(function(){
-    $("#userdata").css("visibility", "visible");
+                // String='neo4j.json';
+            $('#MyButton').click(function(){
+                 $("#userdata").css("visibility", "visible");
 
-//var people = [];
-var data_file = "http://localhost:7654/Result/"+document.getElementById('mytext').value.toString();
-$.ajax({
-type:"GET",
-url: data_file,
-dataType: 'json',
-contentType: "application/json",
-crossDomain: true,
-success: function(data) {
-$("#userdata tbody").empty();
-$.each(data, function(i,f) {
-var tblRow = "<tr>" + "<td>" + f.record + "</td>" +
-"<td>" + f.column + "</td>" + "<td>" + f.table + "</td>" + "<td>" + f.database + "</td>" + "</tr>"
-$(tblRow).appendTo("#userdata tbody");
-});
-},
-error: function(jqXHR, textStatus, errorThrown) {
-alert(textStatus);
-},
-});
-});
-});
-</script>
+                    //var people = [];
+                    var data_file = "http://localhost:7654/Result/"+document.getElementById('mytext').value.toString();
+                    $.ajax({
+                        type:"GET",
+                        url: data_file,
+                        dataType: 'json',
+                        contentType: "application/json",
+                        crossDomain: true,
+                        success: function(data) {
+                        $("#userdata tbody").empty();
+                         $.each(data, function(i,f) {
+                            var tblRow = "<tr>" + "<td>" + f.record + "</td>" +
+                                            "<td>" + f.column + "</td>" + "<td>" + f.table + "</td>" + "<td>" + f.database + "</td>" + "</tr>"
+                                $(tblRow).appendTo("#userdata tbody");
+                            });
+                            },
+                            error: function(jqXHR, textStatus, errorThrown) {
+                                alert(textStatus);
+                        },
+                        });
+                    });
+            });
+     </script>
 	</head>
 
 	<body>
@@ -71,8 +71,8 @@ alert(textStatus);
                                 
 				<form  id="myform">
 
+					<table class="table table-striped" style="visibility:hidden" id="userdata">
 
-					<table style="visibility:hidden" id="userdata">
 
 						<tr>
 							<th>Record</th>

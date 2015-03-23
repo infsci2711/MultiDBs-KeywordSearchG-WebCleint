@@ -47,3 +47,11 @@ body{
 .form-group{
     margin-top:25px;
 }
+
+#userdata{
+    margin:auto;
+    font-family:Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size:14px;
+    
+    
+}
