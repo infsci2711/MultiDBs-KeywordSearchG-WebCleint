@@ -1,0 +1,141 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script
+	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<link href="my.css" type="text/css" rel="stylesheet" />
+<script>
+	function demoDisplay() {
+		document.getElementById("image1").style.display = "none";
+		$(document)
+				.ready(
+						function() {
+							// String='neo4j.json';
+							$('#MyButton')
+									.click(
+											function() {
+												//var people = [];
+
+												var data_file = "http://localhost:7654/Result/"
+														+ document
+																.getElementById('mytext').value
+																.toString();
+
+												$
+														.ajax({
+															type : "GET",
+															url : data_file,
+															dataType : 'json',
+															contentType : "application/json",
+															crossDomain : true,
+															success : function(
+																	data) {
+																$(
+																		"#userdata tbody")
+																		.empty();
+																$
+																		.each(
+																				data,
+																				function(
+																						i,
+																						f) {
+																					var tblRow = "<tr>"
+																							+ "<td>"
+																							+ f.record
+																							+ "</td>"
+																							+ "<td>"
+																							+ f.column
+																							+ "</td>"
+																							+ "<td>"
+																							+ f.table
+																							+ "</td>"
+																							+ "<td>"
+																							+ f.database
+																							+ "</td>"
+																							+ "</tr>"
+																					$(
+																							tblRow)
+																							.appendTo(
+																									"#userdata tbody");
+
+																				});
+															},
+															error : function(
+																	jqXHR,
+																	textStatus,
+																	errorThrown) {
+																alert(textStatus);
+															},
+														});
+
+											});
+						});
+
+	}
+</script>
+<title>Insert title here</title>
+</head>
+<body>
+<!--<table style="width:100%">-->
+	<table align=center  collapse;cellspacing=0 width=1000px border=0 >
+		<tr align=left>
+			<td><img src="images/logo.jpg" class="img-rounded"
+				alt="Cinque Terre" width=100px height=50px style="position:absolute;top:10px;"></td>
+		</tr>
+
+		<tr>
+			<td>
+				<h1 style="width:804px;margin:0 auto;">
+					<img src="images/title.jpg" class="img-rounded" alt="Cinque Terre">
+				</h1>
+			</td>
+		</tr>
+		
+		<tr>
+			<td>
+				<div id="C1" style="text-align:right;">
+
+					<input class="form-control input-lg" type="text"
+						value="Type the key word here..." id="mytext"
+						onfocus="if (this.value=='Type the key word here...') this.value='';" style="width:695px;height:50px;">
+				</div>
+				<div id="C2">
+					<button type="button" id="mybutton" onclick="demoDisplay()"
+						class="btn btn-primary btn-lg">SEARCH</button>
+				</div>
+		</tr>
+		<tr>
+			<td>
+				<img id="image1" src="images/G.jpg"
+				class="img-rounded" alt="Cinque Terre" width=800px height=400px style="margin-left:70px;">
+			</td>
+		</tr>
+	</table>
+	<div>
+					<form id="myform">
+						<table id="userdata" border="0" align="center" width="1000px" >
+
+							<thead>
+								<th>Record</th>
+								<th>Column</th>
+								<th>Table</th>
+								<th>Database</th>
+							</thead>
+							<tbody>
+
+							</tbody>
+						</table>
+					</form>
+				</div>
+	
+	<footer>
+		<p align=center>Member: Jie Chen | JunZong Yang | Dancheng Zhang | Yuan Qiu | Chen Luo | Jing Xue </p>
+	</footer>
+</body>
+</html>
