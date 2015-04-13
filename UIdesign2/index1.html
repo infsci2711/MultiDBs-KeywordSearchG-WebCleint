@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script type="text/javascript"
+	src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script
+	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<link href="my.css" type="text/css" rel="stylesheet" />
+
+<script type="text/javascript"> 
+function toindex2() 
+{ 
+var parm1=document.getElementById("mytext").value; 
+var myurl="index2.html"+"?"+"parm1="+parm1; 
+window.location.assign(myurl); 
+} 
+</script> 
+
+</head>
+
+<body>
+
+
+
+	<div class="header">
+		<ul class="nav nav-pills">
+			<li><a href="home.html">Home</a></li>
+			<li class="dropdown"><a class="dropdown-toggle"
+				data-toggle="dropdown" href="#" role="button" aria-expanded="false">
+					Entries <span class="caret"></span>
+			</a>
+				<ul class="dropdown-menu" role="menu">
+					<li><a href="#">Group #1</a></li>
+					<li><a href="#">Group #2</a></li>
+					<li><a href="#">Group #3</a></li>
+				</ul></li>
+	</div>
+
+
+	<div class="container">
+		<img src="images/logo.png" class="img-rounded">
+		<div class="form-group">
+
+
+
+			<input type="text" id='mytext' align="center" class="form-control">
+			<button type="button" id="MyButton" class="btn btn-primary" onclick="toindex2()">Search</button>
+
+		</div>
+
+
+
+	</div>
+
+</body>
+</html>
