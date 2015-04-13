@@ -18,9 +18,10 @@ Author     : jiechen
 					//var people = [];
 
 					var data_file = "http://localhost:7654/Result/"+document.getElementById('mytext').value.toString();
+					var data_file = "http://localhost:3000/all";
 
 					$.ajax({
-						type:"GET", 
+						//type:"GET", 
 						url: data_file, 
 						dataType: 'json',
 						contentType: "application/json",
@@ -28,17 +29,20 @@ Author     : jiechen
 						success: function(data) {
 							$("#userdata tbody").empty();
 							$("#userdata2 tbody").empty();
-							
-							$.each(data.searchResult, function(i,f) {
-								var tblRow = "<tr>" +"<td>" + f.keyword + "</td>"+ "<td>" + f.record + "</td>" +
-									"<td>" + f.column + "</td>" + "<td>" + f.table + "</td>" + "<td>" + f.database + "</td>" + "</tr>"
-								$(tblRow).appendTo("#userdata tbody");
-							
-							$.each(data.join, function(i,f) {
-								var tblRow = "<tr>" +"<td>" + f.cost + "</td>"+ "<td>" + f.rank + "</td>" +
-									"<td>" + f.relations + "</td>" + "</tr>"
-								$(tblRow).appendTo("#userdata2 tbody");
 
+							$.each(data, function(i,f) {
+								$.each(f.searchResult, function(i,f1) {
+									var tblRow = "<tr>" +"<td>" + f1.keyword + "</td>"+ "<td>" + f1.record + "</td>" +
+										"<td>" + f1.column + "</td>" + "<td>" + f1.table + "</td>" + "<td>" + f1.database + "</td>" + "</tr>"
+									$(tblRow).appendTo("#userdata tbody");
+								}); 
+
+								$.each(f.join, function(i,f2) {
+									var tblRow = "<tr>" +"<td>" + f2.cost + "</td>"+ "<td>" + f2.rank + "</td>" +
+										"<td>" + f2.relations + "</td>" + "</tr>"
+									$(tblRow).appendTo("#userdata2 tbody");
+
+								}); 
 							}); 
 						}, 
 						error: function(jqXHR, textStatus, errorThrown) {
@@ -78,7 +82,7 @@ Author     : jiechen
 
 						</tbody>
 					</table>
-					
+
 					<table id= "userdata2" border="2" align="center">
 
 						<thead>
