@@ -13,22 +13,27 @@
 <link href="my.css" type="text/css" rel="stylesheet" />
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
+
+
+<!-- begin:在每个页面的这个位置加入下面这行代码即可,仅此而已 --> 
 <script type="text/javascript"> 
-function getparm1() 
+var initialvar =function getparm1() 
 { 
-var url=location.href; 
-var tmp1=url.split("?")[1]; 
-var tmp2=tmp1.split("&")[0]; 
-var tmp3=tmp2.split("=")[1]; 
-var parm1=tmp3; 
-alert(parm1); 
-} 
+	var url=location.href; 
+	var tmp1=url.split("?")[1]; 
+	var tmp2=tmp1.split("&")[0]; 
+	var tmp3=tmp2.split("=")[1]; 
+	var parm1=tmp3; 
+	retur parm1; 
+	} 
+</script> 
+<script type="text/javascript">
+onload=function first_data_result{
+	var key=getparm1() 
+}
 </script>
-
-
-
 </head>
-<body>
+<body >
 	<nav class="navbar navbar-custom">
 		<div class="container-fluid">
 			
