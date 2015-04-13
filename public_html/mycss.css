@@ -1,0 +1,86 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 2015-3-22, 15:56:57
+    Author     : qiuyuan
+*/
+
+body{
+    text-align: center;
+}
+
+.header{
+    background-color: black;
+}
+.container{
+    margin-top: 150px;
+    
+}
+
+
+.img-rounded{
+    width:635px;
+    height:230px;
+}
+
+.form-control{
+    height:40px;
+    width:700px;
+    margin: auto;
+    
+    
+}
+
+
+.btn-primary {
+    margin-left: 15px;
+    height:35px;
+    font-size:15px;
+    alignment-baseline: central;
+    /* margin-top: 10px; */
+}
+
+.form-group{
+    margin-top:25px;
+}
+
+#userdata{
+    margin:auto;
+    font-family:Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size:14px;
+    
+    
+}
+
+.logo {
+  border: 0;
+  width: 32%;
+  height: 320%;
+  text-align: center;
+  float: left;
+  margin-top: -3px;
+}
+
+.navbar-default .navbar-form {
+  border-color: #e7e7e7;
+  margin-left: -400px;
+}
+
+
+#mytext{
+  display: inline-block;
+  width: 800px;
+  vertical-align: middle;
+  margin-left: -130px;
+}
+
+.btn-default {
+  color: #fff;
+  background-color: #81BEF7;
+  border-color: #ccc;
+  margin-left:20px;
+}
+

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script type="text/javascript"
+	src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script
+	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<link href="mycss.css" type="text/css" rel="stylesheet" />
+
+<title>Welcome to Geyword</title>
+
+<!--Parse the url and get the query string-->
+<script> 
+    var initialvar =function getparm1() 
+    { 
+	var url=location.href; 
+	var tmp1=url.split("?")[1]; 
+	var tmp2=tmp1.split("&")[0]; 
+	var tmp3=tmp2.split("=")[1]; 
+	var parm1=tmp3; 
+	return parm1; 
+    } 
+
+
+//<!--use the parsed query string to onload the results-->
+
+    onload = function first_data_result{
+	var key = getparm1();
+        var data_file = "http://localhost:7654/Result/"+document.getElementById('key').value.toString();
+	var data_file = "http://localhost:3000/all";
+
+            $.ajax({
+		     //type:"GET", 
+                    url: data_file, 
+                    dataType: 'json',
+                    contentType: "application/json",
+                    crossDomain: true,
+                    success: function(data) {
+                    $("#userdata tbody").empty();
+                    $("#userdata2 tbody").empty();
+
+                    $.each(data, function(i,f) {
+                        $.each(f.searchResult, function(i,f1) {
+                            var tblRow = "<tr>" +"<td>" + f1.keyword + "</td>"+ "<td>" + f1.record + "</td>" +
+                                         "<td>" + f1.column + "</td>" + "<td>" + f1.table + "</td>" + "<td>" + f1.database + "</td>" + "</tr>"
+                            $(tblRow).appendTo("#userdata tbody");
+                        });
+
+                    $.each(f.join, function (i, f2) {
+                        var tblRow = "<tr>" + "<td>" + f2.cost + "</td>" + "<td>" + f2.rank + "</td>" +
+                                     "<td>" + f2.relations + "</td>" + "</tr>"
+                    $(tblRow).appendTo("#userdata2 tbody");
+
+                        });
+                    });
+                    },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                        alert(textStatus);
+                    },
+                   });
+
+                     });
+                 });
+
+</script>
+
+<!--Click on the button to show result on the current page-->
+<script>
+
+	$(document).ready(function()  { 
+	    // String='neo4j.json';
+            $('#MyButton').click(function(){
+            $("#userdata").css("visibility", "visible");
+            $("#userdata2").css("visibility", "visible");
+	    //var people = [];
+
+	var data_file = "http://localhost:7654/Result/"+document.getElementById('mytext').value.toString();
+	var data_file = "http://localhost:3000/all";
+
+            $.ajax({
+		     //type:"GET", 
+                    url: data_file, 
+                    dataType: 'json',
+                    contentType: "application/json",
+                    crossDomain: true,
+                    success: function(data) {
+                    $("#userdata tbody").empty();
+                    $("#userdata2 tbody").empty();
+
+                    $.each(data, function(i,f) {
+                        $.each(f.searchResult, function(i,f1) {
+                            var tblRow = "<tr>" +"<td>" + f1.keyword + "</td>"+ "<td>" + f1.record + "</td>" +
+                                         "<td>" + f1.column + "</td>" + "<td>" + f1.table + "</td>" + "<td>" + f1.database + "</td>" + "</tr>"
+                            $(tblRow).appendTo("#userdata tbody");
+                        });
+
+                    $.each(f.join, function (i, f2) {
+                        var tblRow = "<tr>" + "<td>" + f2.cost + "</td>" + "<td>" + f2.rank + "</td>" +
+                                     "<td>" + f2.relations + "</td>" + "<td>" + f2.tables + "</td>" + "</tr>"
+                    $(tblRow).appendTo("#userdata2 tbody");
+
+                        });
+                    });
+                    },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                        alert(textStatus);
+                    },
+                   });
+
+                     });
+                 });
+
+        </script>
+</head>
+
+<!--This is the start of body-->
+<body>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href='index.html'>
+                 <img class="logo" alt="Geyword" src="images/logos.png"/>
+            </a>
+       
+
+    <form class="navbar-form navbar-left" role="search">
+         <div class="form-group" id="search-bar">
+                
+		<input type="text" id='mytext' align="center" class="form-control">
+		<button type="button"  id="MyButton" class="btn btn-default" >Search</button>
+				
+	 </div>
+    </form>
+            
+        </div>
+        </div>
+    </nav>
+    
+    <form id="myform">
+			<table id= "userdata" align="center" class="table table-striped" style="visibility:hidden">
+
+                        <thead>
+                            <tr>
+                                <td>Keyword</td>
+				<td>Record</td>
+				<td>Column</td>
+				<td>Table</td>
+				<td>Database</td>
+                            </tr>
+			</thead>
+			    <tbody>
+
+			    </tbody>
+			</table>
+				
+
+
+                        <table id= "userdata2" align="center" class="table table-striped" style="visibility:hidden">
+
+			    <thead>
+                                <tr>
+                                    <td>Cost</td>
+                                    <td>Rank</td>
+                                    <td>Relation</td>
+                                    <td>Table</td>
+                                </tr>
+                            </thead>
+				<tbody>
+
+				</tbody>
+			</table>
+
+    </form>
+
+</body>
+</html>
+

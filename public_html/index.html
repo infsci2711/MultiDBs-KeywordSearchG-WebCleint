@@ -1,96 +1,62 @@
+
 <!DOCTYPE html>
 <html>
-	<head>
-		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
-                <meta name="viewport" content="width=device-width, initial-scale=1">
-                <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-                <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-                <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-                <link href="my.css" type="text/css" rel="stylesheet" />
+<head>
+<script type="text/javascript"
+	src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script
+	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<link href="mycss.css" type="text/css" rel="stylesheet" />
 
-		<script>
+<script type="text/javascript"> 
+function toindex2() 
+{ 
+var parm1=document.getElementById("mytext").value; 
+var myurl="index2.html"+"?"+"parm1="+parm1; 
+window.location.assign(myurl); 
+} 
+</script> 
 
-			$(document).ready(function()  { 
-				// String='neo4j.json';
-				$('#MyButton').click(function(){
-					$("#userdata").css("visibility", "visible");
-					//var people = [];
+</head>
 
-					var data_file = "http://54.174.121.196:7654/Result/"+document.getElementById('mytext').value.toString();
+<body>
 
-					$.ajax({
-						type:"GET", 
-						url: data_file, 
-						dataType: 'json',
-						contentType: "application/json",
-						crossDomain: true,
-						success: function(data) {
-							$("#userdata tbody").empty();
-							$.each(data, function(i,f) {
-								var tblRow = "<tr>" + "<td>" + f.record + "</td>" +
-									"<td>" + f.column + "</td>" + "<td>" + f.table + "</td>" + "<td>" + f.database + "</td>" + "</tr>"
-								$(tblRow).appendTo("#userdata tbody");
 
-							}); 
-						}, 
-						error: function(jqXHR, textStatus, errorThrown) {
-							alert(textStatus);
-						},
-					});
 
-				});
-			});
-
-		</script>
-	</head>
-
-	<body>
 	<div class="header">
-                <ul class="nav nav-pills">
-                        <li><a href="home.html">Home</a></li>
-                        <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
-                        Entries <span class="caret"></span>
-                        </a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="#">Group #1</a></li>
-                                <li><a href="#">Group #2</a></li>
-                                <li><a href="#">Group #3</a></li>
-                            </ul>
-                       </li>
-            </div>
+		<ul class="nav nav-pills">
+			<li><a href="home.html">Home</a></li>
+			<li class="dropdown"><a class="dropdown-toggle"
+				data-toggle="dropdown" href="#" role="button" aria-expanded="false">
+					Entries <span class="caret"></span>
+			</a>
+				<ul class="dropdown-menu" role="menu">
+					<li><a href="#">Group #1</a></li>
+					<li><a href="#">Group #2</a></li>
+					<li><a href="#">Group #3</a></li>
+				</ul></li>
+	</div>
 
 
-		<div class="container2" >
-		         <img src="images/logo.png" class="img-small" >
-			<div class="form-group2" >
-					<input type="text" id='mytext' align="left" class="form-control2">
-					<button type="button"  id="MyButton" class="btn btn-second" >Search</button>
-				
-				</div>
-
-				<form id="myform">
+	<div class="container">
+		<img src="images/logo.png" class="img-rounded">
+		<div class="form-group">
 
 
-					<table id= "userdata" align="center" class="table table-striped" style="visibility:hidden">
 
-                        <thead>
-						<tr align="center" font-weight="bold">
-						    
-							<td bgcolor="#BBFFFF"><B>Record</B></td>
-							<td bgcolor="#BBFFFF"><B>Column</B></td>
-							<td bgcolor="#BBFFFF"><B>Table</B></td>
-							<td bgcolor="#BBFFFF"><B>Database</B></td>
-						    
-						</tr>
-						</thead>
-						<tbody>
+			<input type="text" id='mytext' align="center" class="form-control">
+			<button type="button" id="MyButton" class="btn btn-primary" onclick="toindex2()">Search</button>
 
-						</tbody>
-					</table>
-				</form>
-			</div>
 		</div>
 
-	</body>
+
+
+	</div>
+
+</body>
 </html>
