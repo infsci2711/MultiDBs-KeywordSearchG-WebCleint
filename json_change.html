@@ -3,12 +3,15 @@ Document   : jso
 Created on : Feb 23, 2015, 5:29:42 AM
 Author     : jiechen
 --!>
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 	<head>
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"> </script>
+				<meta name="viewport" content="width=device-width, initial-scale=1">
+                <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+                <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+                <link href="my.css" type="text/css" rel="stylesheet" />
 
 		<script>
 
@@ -19,7 +22,7 @@ Author     : jiechen
 
 					var data_file = "http://localhost:7654/Result/"+document.getElementById('mytext').value.toString();
 					var data_file = "http://localhost:3000/all";
-
+					
 					$.ajax({
 						//type:"GET", 
 						url: data_file, 
@@ -49,6 +52,13 @@ Author     : jiechen
 							alert(textStatus);
 						},
 					});
+					
+					$("#search").removeClass('container').addClass('container2');
+					$("#group").removeClass('form-group').addClass('form-group2');
+					$("#logo").removeClass('img-rounded').addClass('img-small');
+					$("#mytext").removeClass('form-control').addClass('form-control2');
+					$("#MyButton").removeClass('btn btn-primary').addClass('btn-second');
+					
 
 				});
 			});
@@ -56,39 +66,57 @@ Author     : jiechen
 		</script>
 	</head>
 
+
 	<body>
+	<div class="header">
+                <ul class="nav nav-pills">
+                        <li><a href="home.html">Home</a></li>
+                        <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
+                        Entries <span class="caret"></span>
+                        </a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#">Group #1</a></li>
+                                <li><a href="#">Group #2</a></li>
+                                <li><a href="#">Group #3</a></li>
+                            </ul>
+                       </li>
+            </div>
 
-		<div class="wrapper" align="center">
-			<div class="profile" align="center">
-				<h1 align="center">Key Word Search</h1>
-				<form>
-
-					<input type="text" id='mytext' align="center">
-					<button type="button"  id="MyButton" align="center" >Search</button>
-				</form>
+		<div id="search" class="container" >
+		         <img id="logo" src="logo.png" class="img-rounded" >
+			<div id ="group" class="form-group" >
+					<input type="text" id='mytext' align="left" class="form-control">
+					<button type="button"  id="MyButton" class="btn btn-primary">Search</button>
+				
+				</div>
 				<form id="myform">
 
 
-					<table id= "userdata" border="2" align="center">
+					<table id= "userdata" align="center" class="table table-striped" >
 
 						<thead>
-							<th>KeyWords</th>
-							<th>Record</th>
-							<th>Column</th>
-							<th>Table</th>
-							<th>Database</th>
+						<tr align="center" font-weight="bold">
+							<td bgcolor="#BBFFFF"><B>KeyWords</B></td>							
+							<td bgcolor="#BBFFFF"><B>Record</B></td>
+							<td bgcolor="#BBFFFF"><B>Column</B></td>
+							<td bgcolor="#BBFFFF"><B>Table</B></td>
+							<td bgcolor="#BBFFFF"><B>Database</B></td>
+						</tr>
 						</thead>
 						<tbody>
 
 						</tbody>
 					</table>
 
-					<table id= "userdata2" border="2" align="center">
+					<table id= "userdata2" align="center" class="table table-striped" >
 
 						<thead>
+						<tr align="center" font-weight="bold">
 							<th>Cost</th>
 							<th>Rank</th>
 							<th>Relation</th>
+							</tr>
 						</thead>
 						<tbody>
 
