@@ -59,7 +59,8 @@
 						}
 						if(data.join) {
 							$.each(data.join, function (i, f2) {
-								var tblRow = "<tr>" + "<td>" + f2.rank + "</td>" + "<td>" + f2.cost + "</td><td>"+ f2.tables+"</td></tr>" +
+								var tblRow = "<tr>" + "<td>" + f2.rank + "</td>" + "<td>" + f2.cost + "</td></tr>" +
+								"<tr><td>Tables: </td><td>"+ f2.tables+"</td></tr>" +
 								"<tr><td>Relations: </td><td>" + f2.relations + "</td>" + "</tr>"
 								$(tblRow).appendTo("#userdata2 tbody");
 							});
