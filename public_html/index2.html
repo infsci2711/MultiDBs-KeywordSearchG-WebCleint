@@ -20,6 +20,11 @@
 			function getparm1() 
 			{ 
 				var url=location.href; 
+
+				// normal acess
+				if(url.slice(-4)=="html")
+					return "";
+				
 				var tmp1=url.split("?")[1]; 
 				var tmp2=tmp1.split("&")[0]; 
 				var tmp3=tmp2.split("=")[1]; 
