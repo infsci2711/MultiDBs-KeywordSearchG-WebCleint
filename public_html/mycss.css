@@ -8,9 +8,7 @@ and open the template in the editor.
     Author     : qiuyuan
 */
 
-body{
-    text-align: center;
-}
+
 
 .header{
     background-color: black;
@@ -82,5 +80,9 @@ body{
   background-color: #81BEF7;
   border-color: #ccc;
   margin-left:20px;
+}
+
+table{
+  word-break:break-all;
 }
 
