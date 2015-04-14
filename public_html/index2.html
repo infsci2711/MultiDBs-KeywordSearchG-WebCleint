@@ -44,6 +44,8 @@
 					contentType: "application/json",
 					crossDomain: true,
 					success: function(data) {
+						$("#mypanel1").css("visibility", "visible");
+						$("#mypanel2").css("visibility", "visible");
 						$("#userdata").css("visibility", "visible");
 						$("#userdata2").css("visibility", "visible");
 						$("#userdata tbody").empty();
@@ -59,7 +61,7 @@
 						}
 						if(data.join) {
 							$.each(data.join, function (i, f2) {
-								var tblRow = "<tr>" + "<td>" + f2.rank + "</td>" + "<td>" + f2.cost + "</td></tr>" +
+								var tblRow = "<tr>" + "<td class=\"col-md-1\">" + f2.rank + "</td>" + "<td>" + f2.cost + "</td></tr>" +
 								"<tr><td>Tables </td><td>"+ f2.tables+"</td></tr>" +
 								"<tr><td>Relations </td><td>" + f2.relations + "</td>" + "</tr>"
 								$(tblRow).appendTo("#userdata2 tbody");
@@ -67,7 +69,11 @@
 						}
 					},
 					error: function (jqXHR, textStatus, errorThrown) {
-						alert(textStatus);
+						$("#userdata").css("visibility", "hidden");
+						$("#userdata2").css("visibility", "hidden");
+						$("#mypanel1").css("visibility", "hidden");
+						$("#mypanel2").css("visibility", "hidden");
+						//alert(textStatus);
 					},
 				});
 
@@ -114,8 +120,9 @@
 		</div>
 		</nav>
 
-		<form id="myform">
-			<div class="table-responsive">
+			<div class="col-lg-10 col-md-offset-1">
+			<div class="panel panel-default" style="visibility:hidden" id="mypanel1">
+			<div class="panel-heading"> <h1>GeyWord Results</h1></div>
 			<table id= "userdata" class="table table-striped" style="visibility:hidden">
 
 				<thead>
@@ -131,15 +138,21 @@
 
 				</tbody>
 			</table>
+
 			</div>
 
-			<div class="table-responsive">
+			<div class="clearfix"></div>
+			<div class="clearfix"></div>
+
+			<div class="panel panel-default" style="visibility:hidden" id="mypanel2">
+				<div class="panel-heading"> <h1>GeyWord Relations</h1></div>
+
 			<table id= "userdata2" class="table table-striped" style="visibility:hidden">
 
 				<thead>
 					<tr>
+						<td class="col-md-1">Rank</td>
 						<td>Cost</td>
-						<td>Rank</td>
 						
 					</tr>
 				</thead>
@@ -148,8 +161,8 @@
 				</tbody>
 			</table>
 			</div>
+			</div>
 
-		</form>
 
 	</body>
 </html>
