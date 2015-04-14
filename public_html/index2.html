@@ -15,22 +15,24 @@
 		<title>Welcome to Geyword</title>
 
 		<!--Parse the url and get the query string-->
-	<!--Click on the button to show result on the current page-->
-	<script>
+		<!--Click on the button to show result on the current page-->
+		<script>
 			function getparm1() 
 			{ 
 				var url=location.href; 
 
 				// normal acess
 				if(url.slice(-4)=="html")
-					return "";
-				
+				return "";
+
 				var tmp1=url.split("?")[1]; 
 				var tmp2=tmp1.split("&")[0]; 
 				var tmp3=tmp2.split("=")[1]; 
 				var parm1=tmp3; 
 				return parm1; 
 			};
+
+
 
 			function injetTables(data_file) {
 				//var people = [];
@@ -47,105 +49,107 @@
 						$("#userdata tbody").empty();
 						$("#userdata2 tbody").empty();
 
-							if(data.searchResult) {
+						if(data.searchResult) {
 
-								$.each(data.searchResult, function(i,f1) {
-									var tblRow = "<tr>" +"<td>" + f1.keyword + "</td>"+ "<td>" + f1.record + "</td>" +
-										"<td>" + f1.column + "</td>" + "<td>" + f1.table + "</td>" + "<td>" + f1.database + "</td>" + "</tr>"
-									$(tblRow).appendTo("#userdata tbody");
-								});
-							}
-							if(data.join) {
-								$.each(data.join, function (i, f2) {
-									var tblRow = "<tr>" + "<td>" + f2.cost + "</td>" + "<td>" + f2.rank + "</td>" +
-										"<td>" + f2.relations + "</td>" + "<td>" + f2.tables + "</td>" + "</tr>"
-									$(tblRow).appendTo("#userdata2 tbody");
-								});
-							}
+							$.each(data.searchResult, function(i,f1) {
+								var tblRow = "<tr>" +"<td>" + f1.keyword + "</td>"+ "<td>" + f1.record + "</td>" +
+									"<td>" + f1.column + "</td>" + "<td>" + f1.table + "</td>" + "<td>" + f1.database + "</td>" + "</tr>";
+								$(tblRow).appendTo("#userdata tbody");
+							});
+						}
+						if(data.join) {
+							$.each(data.join, function (i, f2) {
+								var tblRow = "<tr>" + "<td>" + f2.rank + "</td>" + "<td>" + f2.cost + "</td><td>"+ f2.tables+"</td></tr>" +
+								"<tr><td>Relations: </td><td colspan=\"2\" class=\"col-md-6\">" + f2.relations + "</td>" + "</tr>"
+								$(tblRow).appendTo("#userdata2 tbody");
+							});
+						}
 					},
 					error: function (jqXHR, textStatus, errorThrown) {
 						alert(textStatus);
 					},
 				});
-			
+
 			};
 
-		$(document).ready(function()  { 
-			var initialvar = getparm1();
-			if(initialvar != "") {
-				var data_file = "http://54.174.121.196:7654/Join/"+initialvar;
-				injetTables(data_file);
-			}
-			// String='neo4j.json';
-			$('#MyButton').click(function(){
-				var data_file = "http://54.174.121.196:7654/Join/"+document.getElementById('mytext').value.toString();
-				injetTables(data_file);
+			$(document).ready(function()  { 
 
+				var initialvar = getparm1();
+				if(initialvar != "") {
+					var data_file = "http://54.174.121.196:7654/Join/"+initialvar;
+					injetTables(data_file);
+				}
+				// String='neo4j.json';
+				$('#MyButton').click(function(){
+					var data_file = "http://54.174.121.196:7654/Join/"+document.getElementById('mytext').value.toString();
+					injetTables(data_file);
+
+				});
 			});
-		});
 
-	</script>
-</head>
+		</script>
+	</head>
 
-<!--This is the start of body-->
-<body>
-	<nav class="navbar navbar-default">
-	<div class="container-fluid">
-		<div class="navbar-header">
-			<a class="navbar-brand" href='index.html'>
-				<img class="logo" alt="Geyword" src="images/logos.png"/>
-			</a>
+	<!--This is the start of body-->
+	<body>
+		<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href='index.html'>
+					<img class="logo" alt="Geyword" src="images/logos.png"/>
+				</a>
 
 
-			<form class="navbar-form navbar-left" role="search">
-				<div class="form-group" id="search-bar">
+				<form class="navbar-form navbar-left" role="search">
+					<div class="form-group" id="search-bar">
 
-					<input type="text" id='mytext' align="center" class="form-control">
-					<button type="button"  id="MyButton" class="btn btn-default" >Search</button>
+						<input type="text" id='mytext' align="center" class="form-control">
+						<button type="button"  id="MyButton" class="btn btn-default" >Search</button>
 
-				</div>
-			</form>
+					</div>
+				</form>
 
+			</div>
 		</div>
-	</div>
-	</nav>
+		</nav>
 
-	<form id="myform">
-		<table id= "userdata" align="center" class="table table-striped" style="visibility:hidden">
+		<form id="myform">
+			<div class="table-responsive">
+			<table id= "userdata" class="table table-striped" style="visibility:hidden">
 
-			<thead>
-				<tr>
-					<td>Keyword</td>
-					<td>Record</td>
-					<td>Column</td>
-					<td>Table</td>
-					<td>Database</td>
-				</tr>
-			</thead>
-			<tbody>
+				<thead>
+					<tr>
+						<td>Keyword</td>
+						<td>Record</td>
+						<td>Column</td>
+						<td>Table</td>
+						<td>Database</td>
+					</tr>
+				</thead>
+				<tbody>
 
-			</tbody>
-		</table>
+				</tbody>
+			</table>
+			</div>
 
+			<div class="table-responsive">
+			<table id= "userdata2" class="table table-striped" style="visibility:hidden">
 
+				<thead>
+					<tr>
+						<td>Cost</td>
+						<td>Rank</td>
+						<td>Table</td>
+					</tr>
+				</thead>
+				<tbody>
 
-		<table id= "userdata2" align="center" class="table table-striped" style="visibility:hidden">
+				</tbody>
+			</table>
+			</div>
 
-			<thead>
-				<tr>
-					<td>Cost</td>
-					<td>Rank</td>
-					<td>Relation</td>
-					<td>Table</td>
-				</tr>
-			</thead>
-			<tbody>
+		</form>
 
-			</tbody>
-		</table>
-
-	</form>
-
-</body>
+	</body>
 </html>
 
