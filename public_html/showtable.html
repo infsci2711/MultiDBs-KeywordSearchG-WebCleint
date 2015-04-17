@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<script type="text/javascript"
+			src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet"
+		href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+		<script
+			src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script
+			src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+
+
+<script>
+	function getparm1() {
+		var url = location.href;
+
+		// normal acess
+		if (url.slice(-4) == "html")
+			return "";
+
+		var tmp1 = url.split("?")[1];
+		var tmp2 = tmp1.split("&")[0];
+		var tmp3 = tmp2.split("=")[1];
+		var parm1 = tmp3;
+		return parm1;
+	};
+</script>
+
+
+
+</head>
+<body>
+
+
+
+
+
+
+</body>
+</html>
