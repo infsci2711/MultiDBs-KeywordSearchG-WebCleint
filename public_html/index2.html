@@ -55,7 +55,7 @@
 
 							$.each(data.searchResult, function(i,f1) {
 								var tblRow = "<tr>" +"<td>" + f1.keyword + "</td>"+ "<td>" + f1.record + "</td>" +
-									"<td>" + f1.column + "</td>" + "<td>" + f1.table + "</td>" + "<td>" + f1.database + "</td>"+ "<td class=\"col-md-2\"><a href=\showtable.html?table=" + f1.table + ">" + "Result" +"</a> <a href=\"#\">"+ "Visualization"+"</a></d></tr>";
+									"<td>" + f1.column + "</td>" + "<td>" + f1.table + "</td>" + "<td>" + f1.database + "</td>"+ "<td class=\"col-md-2\"><a href=\showtable.html?table=" + f1.table + ">" + "Show Table" +"</a> <a href=\"#\">"+ "Visualization"+"</a></d></tr>";
 								$(tblRow).appendTo("#userdata tbody");
 							});
 						}
