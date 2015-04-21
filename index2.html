@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<script type="text/javascript"
-			src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+		<meta charset="utf-8">
+    	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet"
 		href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
@@ -17,22 +17,17 @@
 		<!--Parse the url and get the query string-->
 		<!--Click on the button to show result on the current page-->
 		<script>
-			function getparm1() 
-			{ 
+			function getparm1() { 
 				var url=location.href; 
-
 				// normal acess
 				if(url.slice(-4)=="html")
 				return "";
-
 				var tmp1=url.split("?")[1]; 
 				var tmp2=tmp1.split("&")[0]; 
 				var tmp3=tmp2.split("=")[1]; 
 				var parm1=tmp3; 
 				return parm1; 
 			};
-
-
 
 			function injetTables(data_file) {
 				//var people = [];
@@ -52,18 +47,43 @@
 						$("#userdata2 tbody").empty();
 
 						if(data.searchResult) {
-
 							$.each(data.searchResult, function(i,f1) {
-								var tblRow = "<tr>" +"<td>" + f1.keyword + "</td>"+ "<td>" + f1.record + "</td>" +
-									"<td>" + f1.column + "</td>" + "<td>" + f1.table + "</td>" + "<td>" + f1.database + "</td>"+ "<td>"+ f1.ID+"</td>" + "<td class=\"col-md-2\"><a href=\showtable.html?table=" + f1.table + ">" + "Show Table" +"</a></td></tr>";
+								var tblRow = "<tr>" 
+									+ "<td>" + f1.keyword + "</td>"
+									+ "<td>" + f1.record + "</td>" 
+									+ "<td>" + f1.column + "</td>" 
+									+ "<td>" + f1.table + "</td>" 
+									+ "<td>" + f1.database + "</td>"
+									+ "<td>" + f1.ID + "</td>"
+									+ "<td class='col-md-4'>"
+									+ "<button "
+										+ "id='showtable_"+f1.table+"_"+f1.ID+"'"
+										+ "class='btn btn-default'" 
+										+ "role='button'"
+										+ "data-ttoggle='modal'"
+										+ "data-target='#myModal'"
+										+ "onclick='table_show(this.id)'"
+									+ "> Show Table </button>"
+									+ "<a href='#' class='btn btn-default'>Visualization</a>"
+									+ "</td>"
+									+ "</tr>";
 								$(tblRow).appendTo("#userdata tbody");
 							});
 						}
 						if(data.join) {
 							$.each(data.join, function (i, f2) {
-								var tblRow = "<tr>" + "<td class=\"col-md-1\">" + f2.rank + "</td>" + "<td>" + f2.cost + "</td></tr>" +
-								"<tr><td>Tables </td><td>"+ f2.tables+"</td></tr>" +
-								"<tr><td>Relations </td><td>" + f2.relations + "</td>" + "</tr>"
+								var tblRow = "<tr>"
+									+ "<td class=\"col-md-1\">" + f2.rank + "</td>" 
+									+ "<td>" + f2.cost + "</td>"
+									+ "</tr>" 
+									+ "<tr>"
+									+ "<td>Tables</td>"
+									+ "<td>"+ f2.tables+"</td>"
+									+ "</tr>"
+									+ "<tr>"
+									+ "<td>Relations</td>"
+									+ "<td>" + f2.relations + "</td>"
+									+ "</tr>"
 								$(tblRow).appendTo("#userdata2 tbody");
 							});
 						}
@@ -79,7 +99,55 @@
 
 			};
 
-			$(document).ready(function()  { 
+			function table_show(id){
+				var infos = id.split('_');
+				var table_name = infos[1];
+				var database_id = infos[2];
+				var request_url = "http://54.174.80.167:7654/Query/"+database_id+"/"+table_name;
+				console.log(request_url);
+				$.ajax({
+					url : request_url,
+					dataType: 'json',
+					contentType: "application/json",
+					crossDomain: true,
+					success: function(data) {
+
+						// get column names.
+						// console.log(data.schema.columnNames);
+						var column_names = data.schema.columnNames;
+						var tblHeadRow = "<tr>";
+						$.each(column_names, function(i, column_name){
+							tblHeadRow += "<th>" + column_name+"</th>";
+						});
+						tblHeadRow += "</tr>";
+
+						// get table content.
+						// console.log(data.data);
+						var tblBodyRows = "";
+						$.each(data.data, function(i, row_array){
+							tblBodyRows += "<tr>";
+							$.each(row_array['row'], function(j, row_content){
+								tblBodyRows += "<td>" + row_array['row'][j] + "</td>";
+							});
+							tblBodyRows += "</tr>"
+						});
+
+						var content = "<table class='table table-hover table-striped'><thead>"
+						+ tblHeadRow
+						+ "</thead><tbody>"
+						+ tblBodyRows
+						+ "</tbody></table>";
+
+						$('#myModalBody').html(content);
+						$('#myModal').modal('show');
+					},
+					error: function(jqXHR, textStatus, errorThrown) {
+						$('#myModal').modal('hide');
+					},
+				});				
+			};
+
+			$(document).ready(function() { 
 
 				var initialvar = getparm1();
 				if(initialvar != "") {
@@ -92,6 +160,8 @@
 					injetTables(data_file);
 
 				});
+
+				
 			});
 
 		</script>
@@ -99,75 +169,90 @@
 
 	<!--This is the start of body-->
 	<body>
-		<nav class="navbar navbar-default">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<a class="navbar-brand" href='index.html'>
-					<img class="logo" alt="Geyword" src="images/logos.png"/>
-				</a>
-
-
-				<form class="navbar-form navbar-left" role="search">
-					<div class="form-group" id="search-bar">
-
-						<input type="text" id='mytext' align="center" class="form-control">
-						<button type="button"  id="MyButton" class="btn btn-default" >Search</button>
-
-					</div>
-				</form>
-
-			</div>
+		<div class="header">
+			<ul class="nav nav-pills">
+				<li><a href="home.html">Home</a></li>
+				<li class="dropdown">
+					<a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">Entries <span class="caret"></span></a>
+					<ul class="dropdown-menu" role="menu">
+						<li><a href="#">Group #1</a></li>
+						<li><a href="#">Group #2</a></li>
+						<li><a href="#">Group #3</a></li>
+					</ul>
+				</li>
 		</div>
+		<nav class="navbar navbar-default">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<a class="navbar-brand" href='index.html'>
+						<img class="logo" alt="Geyword" src="images/logos.png"/>
+					</a>
+					<form class="navbar-form navbar-left" role="search">
+						<div class="form-group" id="search-bar">
+							<input type="text" id='mytext' align="center" class="form-control">
+							<button type="button"  id="MyButton" class="btn btn-primary" >Search</button>
+						</div>
+					</form>
+				</div>
+			</div>
 		</nav>
-
-			<div class="col-lg-10 col-md-offset-1">
+		<div class="col-lg-10 col-md-offset-1">
 			<div class="panel panel-default" style="visibility:hidden" id="mypanel1">
-			<div class="panel-heading"> <h1>GeyWord Results
-			  <a href="http://54.173.71.235/"><button class="btn btn-default">Visualization</button></a>
-			  </h1>
+				<div class="panel-heading"><h1>GeyWord Results</h1></div>
+				<table id= "userdata" class="table table-striped" style="visibility:hidden">
+					<thead>
+						<tr>
+							<td>Keyword</td>
+							<td>Record</td>
+							<td>Column</td>
+							<td>Table</td>
+							<td>Database</td>
+							<td>Database ID</td>
+						</tr>
+					</thead>
+					<tbody>
+					</tbody>
+				</table>
 			</div>
-			<table id= "userdata" class="table table-striped" style="visibility:hidden">
-
-				<thead>
-					<tr>
-						<td>Keyword</td>
-						<td>Record</td>
-						<td>Column</td>
-						<td>Table</td>
-						<td>Database</td>
-						<td>Database ID</td>
-					</tr>
-				</thead>
-				<tbody>
-
-				</tbody>
-			</table>
-
-			</div>
-
 			<div class="clearfix"></div>
 			<div class="clearfix"></div>
-
 			<div class="panel panel-default" style="visibility:hidden" id="mypanel2">
-				<div class="panel-heading"> <h1>GeyWord Relations</h1></div>
-
-			<table id= "userdata2" class="table table-striped" style="visibility:hidden">
-
+				<div class="panel-heading"><h1>GeyWord Relations</h1></div>
+				<table id= "userdata2" class="table table-striped" style="visibility:hidden">
 				<thead>
 					<tr>
 						<td class="col-md-1">Rank</td>
 						<td>Cost</td>
-						
 					</tr>
 				</thead>
 				<tbody>
-
 				</tbody>
 			</table>
 			</div>
-			</div>
+		</div>
 
-
+		<!-- Modal -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+		      </div>
+		      <div class="modal-body">
+		    	<div class="container-fluid">
+		    		<div class="col-md-1"></div>
+		    		<div class="col-md-10" id="myModalBody">
+		    		</div>
+		    		<div class="col-md-1"></div>
+		    	</div>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
 	</body>
 </html>
 
