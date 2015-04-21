@@ -4,8 +4,8 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 */
 /* 
-    Created on : 2015-3-22, 15:56:57
-    Author     : qiuyuan
+    Created on : 2015-3-22, 15:56:57  2015-4-13
+    Author     : qiuyuan & chen
 */
 
 body{
@@ -45,7 +45,7 @@ body{
     height:40px;
     width:500px;
     margin: auto;
-float:left;   
+    float:left;   
 }
 
 
@@ -62,7 +62,6 @@ float:left;
     height:40px;
     width:100px;
     font-size:15px;
-    alignment-baseline: center;
     float:left;
 }
 
@@ -78,7 +77,5 @@ float:left;
 #userdata{
     margin:auto;
     font-family:Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
-    font-size:14px;
-    
-    
+    font-size:14px;    
 }
