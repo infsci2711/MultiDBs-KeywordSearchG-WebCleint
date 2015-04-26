@@ -14,9 +14,14 @@
 
 		<title>Welcome to Geyword</title>
 
+		<link rel="icon" href="images/data2.png" type="image/png">
+
 		<!--Parse the url and get the query string-->
 		<!--Click on the button to show result on the current page-->
 		<script>
+			var restBaseUrl = "http://colfusion.exp.sis.pitt.edu/keywordsearchg1rest/"; 
+			var queryRestBaseUrl = "http://colfusion.exp.sis.pitt.edu/queryrest/"; 
+
 			function getparm1() { 
 				var url=location.href; 
 				// normal acess
@@ -103,7 +108,7 @@
 				var infos = id.split('_');
 				var table_name = infos[1];
 				var database_id = infos[2];
-				var request_url = "http://54.174.80.167:7654/Query/"+database_id+"/"+table_name;
+				var request_url = queryRestBaseUrl + "Query/" + database_id + "/" + table_name;
 				console.log(request_url);
 				$.ajax({
 					url : request_url,
@@ -151,12 +156,12 @@
 
 				var initialvar = getparm1();
 				if(initialvar != "") {
-					var data_file = "http://54.174.121.196:7654/Join/"+initialvar;
+					var data_file = restBaseUrl + "Join/" + initialvar;
 					injetTables(data_file);
 				}
 				// String='neo4j.json';
 				$('#MyButton').click(function(){
-					var data_file = "http://54.174.121.196:7654/Join/"+document.getElementById('mytext').value.toString();
+					var data_file = restBaseUrl + "Join/" + document.getElementById('mytext').value.toString();
 					injetTables(data_file);
 
 				});
